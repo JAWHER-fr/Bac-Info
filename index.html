@@ -120,6 +120,8 @@ button[type="button"] {
     margin-bottom:0%;
 
   }
+span{font-size:34px;}
+#res{background-color:gray;}
 
 #m, #res {
     font-weight: bold;
@@ -220,7 +222,7 @@ function calculer() {
     }
 
     // Affichage du résultat dans l'élément avec l'id "m"
-    document.getElementById("m").innerHTML += s.toFixed(2) + '<br>';
+    document.getElementById("m").innerHTML += '<-'+s.toFixed(2) + '<br>';
 
     // Ajout du résultat au tableau
     t.push(p);
@@ -232,7 +234,7 @@ function calfin() {
 
     // Calcul de la somme des éléments du tableau
     for (let i = 0; i < t.length; i++) {
-      if(i<=2){
+      if(i<=3){
         m=m+(t[i]*3);
       }
       else{
@@ -241,7 +243,7 @@ function calfin() {
       
     }
     // Calcul de la moyenne
-    let moy = (m1+m)/16;
+    let moy = (m1+m)/18;
       
 
     // Affichage du résultat dans l'élément avec l'id "res"
