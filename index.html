@@ -15,7 +15,12 @@
     --border-radius: 5px;
     --transition-duration: 0.3s;
 }
-
+  span{
+    font-size:34px;
+  }
+#res{
+  background-color:gray;
+}
 body {
     background-color: var(--primary-color);
     font-family: var(--font-family);
@@ -33,16 +38,26 @@ h1 {
     transition:font-size,color,2s;
     
 }
+  .transform-effect {
+    transform: scale(0.9);
+    transition: transform 0.2s ease-in-out;
+}
+
   h1:hover{
     font-size:40px;
     color:pink;
+    text-decoration:underline solid black;
   }
-  pre{
+th{
+  font-size:15px;
+  font-style:italic;
+}
+.x{
     font-size:20px;
     text-decoration:underline black dotted;
     font-weight:bold;}
 
-table {
+table{
     margin: 20px auto;
     border-collapse: collapse;
     width: 60%;
@@ -60,6 +75,11 @@ th, td {
     font-size: 14px;
     color: var(--secondary-color);
 }
+  h2{
+    text-decoration:underline dotted 2px;
+    font-weight:bolder;
+    font-size:20px;
+  }
 
 .j {
     background-color: var(--secondary-color);
@@ -113,6 +133,7 @@ input[type="number"] {
 
 button[type="button"] {
     margin-top: 10px;
+    letter-spacing: 2px;
 }
   .o{
     font-size:20px;
@@ -120,8 +141,6 @@ button[type="button"] {
     margin-bottom:0%;
 
   }
-span{font-size:34px;}
-#res{background-color:gray;}
 
 #m, #res {
     font-weight: bold;
@@ -130,7 +149,7 @@ span{font-size:34px;}
     </style>
 </head>
 <body>
-    <h1>π Bienvenue à Mon Site Web pour Bac 2k25 π</h1>
+    <h1> Bienvenue Bac 2k25 </h1>
     <form action="#">
         <label for="controle">Donner le contrôle :</label>
         <input type="number" class="k" id="con" name="controle" step="0.01"><br><br>
@@ -141,7 +160,7 @@ span{font-size:34px;}
         <label for="orale">Donner la note d'oral :</label>
         <input type="number" class="k" id="or" name="orale" step="0.01"><br><br>
         
-        <button type="button" class="j" onclick="calculerMoyenne()">Calculer La Moyenne</button>
+        <button type="button" class="j" onclick="calculerMoyenne()" id="button">Calculer La Moyenne</button>
     <h2>Calculer Votre Moyenne</h2>
     <table>
         <thead>
@@ -153,50 +172,59 @@ span{font-size:34px;}
         </thead>
         <tbody>
             <tr>
-                <td><strong>STI</strong></td>
+                <td><strong> 1. STI</strong></td>
                 <td>3</td>
-              <td rowspan="10"><span id="m"></span></td>
+              <td><span id="st"></span></td>
             </tr>
             <tr>
-                <td><strong>Programmation</strong></td>
+                <td><strong>2. Programmation</strong></td>
                 <td>3</td>
+                <td><span id="pr"></span></td>
             </tr>
             <tr>
-                <td><strong>Mathématique</strong></td>
+                <td><strong>3. Mathématique</strong></td>
                 <td>3</td>
+                <td><span id="ma"></span></td>
             </tr>
             <tr>
-                <td>Physique</td>
+                <td><strong>4. Physique</strong></td>
                 <td>3</td>
+              <td><span id="ph"></span></td>
             </tr>
             <tr>
-                <td>Arabe</td>
+                <td>5. Arabe</td>
                 <td>1</td>
+              <td><span id="ar"></span></td>
             </tr>
             <tr>
-                <td>Italien</td>
+                <td>5. Italien</td>
                 <td>1</td>
+              <td><span id="it"></span></td>
             </tr>
             <tr>
-                <td>Sport</td>
+                <td>7. Sport</td>
                 <td>1</td>
+                <td><span id="sp"></span></td>
             </tr>
             <tr>
-                <td>Anglais</td>
+                <td>8. Anglais</td>
                 <td>1</td>
+                <td><span id="an"></span></td>
 
             </tr>
             <tr>
-                <td>Français</td>
+                <td>9. Français</td>
                 <td>1</td>
+              <td><span id="fr"></span></td>
             </tr>
             <tr>
-                <td>Falsfa</td>
+                <td>10. Falsfa</td>
                 <td>1</td>
+                <td><span id="fal"></span></td>
             </tr>
-          <tr><td><input type="button" value="La Moyennes est" class="j" onclick="calfin()"></td><td colspan="2"><span id="res"></span></td></tr>        </tbody>
+          <tr><td><input type="button" value="La Moyennes est" class="j" onclick="calfin()"></td><td colspan="2"><span id="res"></span></td></tr></tbody>
     </table>
-  <pre>Des informations importantes
+  <pre class="x">Des informations importantes
   </pre>
     <p class="note">SC = 18 (somme totale des coefficients)</p>
     <p class="note">Remarque : Pour une matière qui contient une note unitaire, il faut saisir la note dans les deux premiers champs.</p></form>
@@ -220,29 +248,38 @@ function calculer() {
         s = (Number(con) + Number(or) + Number(sy) * 2) / 4;
         p = s
     }
-
-    // Affichage du résultat dans l'élément avec l'id "m"
-    document.getElementById("m").innerHTML += '<-'+s.toFixed(2) + '<br>';
-    document.getElementById("sy").value="";
-    document.getElementById("con").value="";
-    document.getElementById("or").value="";
-
-    // Ajout du résultat au tableau
+    ajouterNote(s);
     t.push(p);
+}
+    let index = 0;
+    function ajouterNote(s) {
+    let tp = ["st", "pr", "ma", "ph", "ar", "it", "sp", "an", "fr", "fal"];
+    
+    if (index < tp.length) {
+        document.getElementById(tp[index]).innerHTML = s.toFixed(2);
+        document.getElementById("sy").value = "";
+        document.getElementById("con").value = "";
+        document.getElementById("or").value = "";
+        
+        index++;  // Passer à l'élément suivant du tableau
+    } else {
+        alert("Toutes les matières sont remplies !");
+    }
 }
 
 function calfin() {
     let m = 0;
     let m1=0;
-
     // Calcul de la somme des éléments du tableau
     for (let i = 0; i < t.length; i++) {
       if(i<=3){
-        m=m+(t[i]*3);
+        m=m+(t[i]*3); 
       }
       else{
           m1=m1+t[i]
+          
         }
+      
       
     }
     // Calcul de la moyenne
@@ -254,11 +291,19 @@ function calfin() {
 }
 
 function calculerMoyenne() {
+    document.getElementById("button").addEventListener("click", function() {
+    this.classList.add("transform-effect");
+    
+    // Supprimer l'effet après un court délai
+    setTimeout(() => {
+        this.classList.remove("transform-effect");
+    }, 200);
+});
+
     // Récupération des valeurs des champs input
     let con = document.getElementById("con").value;
     let sy = document.getElementById("sy").value;
     let or = document.getElementById("or").value;
-
     // Vérification que les champs ne sont pas vides
     if (con === "" || sy === "") {
         alert("Veuillez remplir les champs");
@@ -288,11 +333,8 @@ function calculerMoyenne() {
         document.getElementById("or").value = "";
         return;
     }
-
-    // Appel de la fonction calculer si toutes les conditions sont remplies
     calculer();
 }
   </script>
 </body>
 </html>
-
