@@ -36,8 +36,17 @@ h1 {
     color: red;
     text-shadow: var(--shadow);
     transition:font-size,color,2s;
+    animation:rotation 5s;
     
 }
+   @keyframes rotation {
+      0% {
+        transform: rotate(0deg); /* Start from 0 degrees */
+      }
+      100% {
+        transform: rotate(360deg); /* Rotate to 360 degrees */
+      }
+   }
   .transform-effect {
     transform: scale(0.9);
     transition: transform 0.2s ease-in-out;
@@ -49,6 +58,7 @@ h1 {
     text-decoration:underline solid black;
   }
 th{
+  animation:rotation 5s;
   font-size:15px;
   font-style:italic;
 }
@@ -58,6 +68,7 @@ th{
     font-weight:bold;}
 
 table{
+    animation:rotation 5s;
     margin: 20px auto;
     border-collapse: collapse;
     width: 60%;
@@ -82,6 +93,7 @@ th, td {
   }
 
 .j {
+    animation:rotation 5s;
     background-color: var(--secondary-color);
     font-weight: bolder;
     border-radius: var(--border-radius);
