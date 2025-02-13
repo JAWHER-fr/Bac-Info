@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BAC INFO 2025</title>
     <style>
+  .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            0%   { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
   :root {
     --primary-color: pink;
     --secondary-color: green;
@@ -174,6 +185,9 @@ button[type="button"] {
         
         <button type="button" class="j" onclick="calculerMoyenne()" id="button">Calculer La Moyenne</button>
     <h2>Calculer Votre Moyenne</h2>
+        <div class="marquee">
+            
+        </div>
     <table>
         <thead>
             <tr>
