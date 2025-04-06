@@ -257,6 +257,7 @@ button[type="button"] {
     <p class="note">SC = 18 (somme totale des coefficients)</p>
     <p class="note">Remarque : Pour une matière qui contient une note unitaire, il faut saisir la note dans les deux premiers champs.</p></form>
   <p class="o">إن شاء الله ربي ينجحكم </p>
+    <span id="g"></span>
   <script>
   // Déclaration d'un tableau global pour stocker les résultats
 let t = [];
@@ -363,6 +364,10 @@ function calculerMoyenne() {
     }
     calculer();
 }
+    date=new Date()
+    document.getElementById("g").innerHTML=date
+    y=date.getFullYears()
+    m=date.getMonth()
   </script>
 </body>
 </html>
